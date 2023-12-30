@@ -1,5 +1,5 @@
-import connectMongoDB from "@/libs/script";
-import Blog from "@/models/BlogSchema";
+import connectMongoDB from "@/libs/mongo/script";
+import Blog from "@/libs/models/BlogSchema";
 import { NextResponse } from "next/server";
 
 // export const POST = async (request) => {
@@ -14,12 +14,12 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
   try {
     await connectMongoDB();
-    const blogs = await Blog.find();
+    const blogs = await Blog.find().populate("tagId");
     return new NextResponse(JSON.stringify(blogs));
   } catch (error) {
     return new NextResponse("Error in fetching MongoDB data: " + error);
   }
-};
+}; 
 
 // export const DELETE = async(request) => {
 //     const id = request.nextUrl.searchParams.get('id')

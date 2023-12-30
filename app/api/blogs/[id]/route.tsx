@@ -1,5 +1,5 @@
-import connectMongoDB from "@/libs/script";
-import Blog from "@/models/BlogSchema";
+import connectMongoDB from "@/libs/mongo/script";
+import Blog from "@/libs/models/BlogSchema";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (

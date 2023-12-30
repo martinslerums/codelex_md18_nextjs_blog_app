@@ -1,10 +1,9 @@
-import { Blogs } from './BlogList'
-import styles from './page.module.css'
+import { BlogsList } from './BlogList'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <Blogs />
+    <main>
+      <BlogsList />
     </main>
   )
 }
