@@ -2,10 +2,7 @@ import connectMongoDB from "@/libs/mongo/script";
 import { NextRequest, NextResponse } from "next/server";
 import Comment from "@/libs/models/CommentSchema";
 
-export const GET = async (
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) => {
+export const GET = async ( request: NextRequest, { params }: { params: { id: string } }) => {
   try {
     await connectMongoDB();
     const comments = await Comment.find({ blog: params.id });
@@ -22,10 +19,7 @@ export const GET = async (
   }
 };
 
-export const POST = async (
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) => {
+export const POST = async (request: NextRequest, { params }: { params: { id: string } }) => {
   const { author, comment } = await request.json();
   await connectMongoDB();
   await Comment.create({ author, comment, blog: params.id });

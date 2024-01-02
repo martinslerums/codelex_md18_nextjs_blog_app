@@ -1,8 +1,13 @@
 .nav{
+
     display: flex;
-    justify-content: center;
-    padding: 20px 0;
-    background-color: rgb(0, 0, 117);
+    justify-content: end;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 10px;
+    background: linear-gradient(to right, white, rgba(65, 65, 65, 0.6));
+    text-decoration: none;
+
   }
   
   .link{

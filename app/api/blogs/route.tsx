@@ -14,7 +14,7 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
   try {
     await connectMongoDB();
-    const blogs = await Blog.find().populate("tagId");
+    const blogs = await Blog.find().populate("blogTag", "name")
     return new NextResponse(JSON.stringify(blogs));
   } catch (error) {
     return new NextResponse("Error in fetching MongoDB data: " + error);

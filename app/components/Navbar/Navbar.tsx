@@ -11,9 +11,10 @@ export const Navbar = async () => {
   return (
 
     session ? (
-    <nav>
-      <Link href={'/protected/blogs'}>All blogs</Link>
-      <Link href={'/protected/comments'}>All comments</Link>
+
+    <nav className={styles.nav}>
+      <Link className={styles.link} href={'/protected/blogs'}>All blogs</Link>
+      <Link className={styles.link} href={'/protected/comments'}>All comments</Link>
       <SignOutButton />
     </nav>
     ) : (

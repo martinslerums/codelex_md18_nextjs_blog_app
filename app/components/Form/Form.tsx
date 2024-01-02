@@ -3,17 +3,17 @@ import styles from "./Form.module.css"
 
 type FormProps = {
     onSubmit: (event: FormEvent) => void
-    label: string
+    label?: string
     children: ReactNode;
 }
 
-const Form = ({onSubmit, label, children}: FormProps ) => {
+const Form = ({onSubmit, children}: FormProps ) => {
     return ( 
         <form
             className={styles.form}
             onSubmit={onSubmit}
         >
-            <h6>{label}</h6>
+            {/* <h6  className={styles.heading}>{label}</h6> */}
             <div className={styles.wrapper}>
                 {children}
             </div>

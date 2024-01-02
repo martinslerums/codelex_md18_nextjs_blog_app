@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const commentsSchema = new Schema({
+const commentSchema = new Schema({
   author: String,
   comment: String,
   blog: {
@@ -13,7 +13,6 @@ const commentsSchema = new Schema({
   timestamps: true,
 });
 
-const Comment =
-  mongoose.models.Comment || mongoose.model("Comment", commentsSchema);
+const Comment = mongoose.models.Comment || mongoose.model("Comment", commentSchema);
 
 export default Comment;

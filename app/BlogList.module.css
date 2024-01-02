@@ -2,12 +2,37 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-width: 400px;
+    border: 1px solid black;
+    margin: 0 auto;
 }
 
-.blogCard {
+.blog {
+    padding: 15px 20px;
+    border: 1px solid grey;
+}
+
+.link {
     display: flex;
     flex-direction: column;
-    border: 1px solid grey;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
 
+.title {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.paragraphWrapper {
+    font-size: 1rem;
+}
+
+.paragraph {
+    font-size: 1rem;
+    word-wrap: break-word;
+}
+
+.tag {
+    font-size: 1rem;
 }

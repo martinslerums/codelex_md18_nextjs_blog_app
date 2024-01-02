@@ -1,38 +1,17 @@
-import Image from "next/image";
-import CommentsForm from "./CommentsForm/CommentsForm";
-import CommentsList from "./CommentsList/CommentsList";
+import { Params } from "@/types/types";
+import BlogCommentsForm from "./BlogCommentsForm/BlogCommentsForm";
+import BlogCommentsList from "./BlogCommentsList/BlogCommentsList";
+import BlogDetails from "./BlogDetails/BlogDetails";
 
-const getDataById = async (id: string) => {
-  console.log("Fetching data for blog with ID: ", id);
-
-  const response = await fetch(`http://localhost:3000/api/blogs/${id}`, {
-    cache: "no-store",
-
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data. Status: ${response.status}`);
-  }
-  return response.json();
-};
-
-const BlogDetails = async ({ params }: { params: { id: string } }) => {
-  
-  console.log("Params Object: ", params);
-  const data = await getDataById(params.id);
-  console.log("Received data here:", data);
-
+//Kādēļ nevar izmantot  { params: { id } }: Params ???
+const IndividualBlogView = async ({ params }: Params) => {
   return (
     <main>
-      <div>
-        <Image src={data.imageUrl} alt="photo" width={350} height={350}></Image>
-        <h2>{data.title}</h2>
-        <p>{data.body}</p>
-      </div>
-      <CommentsForm />
-      <CommentsList params={params} />
+      <BlogDetails params={params}/>
+      <BlogCommentsForm params={params} />
+      <BlogCommentsList params={params} />
     </main>
   );
 };
 
-export default BlogDetails;
+export default IndividualBlogView;

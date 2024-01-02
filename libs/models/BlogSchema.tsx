@@ -5,10 +5,13 @@ const blogSchema = new Schema({
   title: String,
   imageUrl: String,
   body: String,
-  tagId: {
+  blogTag: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Tag",
+    ref: "BlogTag",
   },  
+},
+{
+  timestamps: true,
 });
 
 const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);

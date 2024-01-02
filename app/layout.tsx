@@ -26,7 +26,7 @@ export default function RootLayout({children,}: {children: React.ReactNode}) {
         <Provider>
           <Navbar />
           <section>{children}</section>
-          </Provider>
+        </Provider>
       </body>
     </html>
   )

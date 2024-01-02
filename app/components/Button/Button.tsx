@@ -1,3 +1,5 @@
+import styles from "./Button.module.css"
+
 type ButtonProps = {
     type: "submit" | "reset" | "button"
     label: string
@@ -6,10 +8,11 @@ type ButtonProps = {
 
 const Button = ({type, label, onClick}: ButtonProps) => {
     return ( 
-        <div>
+        <div className={styles.wrapper} >
             <button 
-            type={type}
-            onClick={onClick}
+                className={styles.button}
+                type={type}
+                onClick={onClick}
             >
                 {label}
             </button>

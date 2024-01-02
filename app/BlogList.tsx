@@ -1,23 +1,15 @@
+import { authOptions } from "./api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import styles from "./BlogList.module.css"
+import { Blog } from "@/types/types";
+import styles from "./BlogList.module.css";
+import Button from "./components/Button/Button";
 import Image from "next/image";
 import Link from "next/link";
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import Button from "./components/Button/Button";
 
-type Blog = {
-    _id: string,
-    title: string,
-    imageUrl: string,
-    body: string,
-    tag: {
-      name: string;
-    }
-}
 
-const getData = async () => {
+const getBlogs = async () => {
   const response = await fetch("http://localhost:3000/api/blogs", {
-    next: { revalidate: 0 }
+    next: { revalidate: 0 },
   });
   if (!response.ok) {
     throw new Error("Failed to fetch data");
@@ -27,41 +19,38 @@ const getData = async () => {
 
 export const BlogsList = async () => {
   
-  const data = await getData();
-//   console.log(data);7
   const session = await getServerSession(authOptions);
-
-
+  const data = await getBlogs();
+  // console.log(data)
 
   return (
-    <div className={styles.container} >
-      {data &&
-        data.map((blog: Blog) => (
-          (session) ? (
-          <div key={blog._id} className={styles.blogCard}>
-            <Link href={`/${blog._id}`}>
-                <Image src={blog.imageUrl} width={150} height={150} alt="Photo" />
-                <h3>{blog.title}</h3>
-                <div>
-                <p>{blog.body}</p>
+    <div className={styles.container}>
+      {data && data.map((blog: Blog) =>
+          session ? (
+            <div key={blog._id} className={styles.blog}>
+              <Link className={styles.link} href={`/${blog._id}`}>
+              <Image src={blog.imageUrl} width={400} height={250} alt="Photo"/>
+                <h3 className={styles.title}>{`${blog.title}`}</h3>
+                <div className={styles.paragraphWrapper}>
+                  <p className={styles.paragraph}>{blog.body}</p>
                 </div>
-            </Link>
-            <span>{blog.tag.name}</span>
-            <Button type={"button"} label="Did it work?" />
-          </div>
+              </Link>
+              <span className={styles.tag}>{blog.blogTag.name}</span>
+              <Button type="button" label="Did it work?" />
+            </div>
           ) : (
-            <div key={blog._id} className={styles.blogCard}>
-            <Link href={`/${blog._id}`}>
-                <Image src={blog.imageUrl} width={150} height={150} alt="Photo" />
-                <h3>{blog.title}</h3>
-                <div>
-                <p>{blog.body}</p>
+            <div key={blog._id} className={styles.blog}>
+              <Link className={styles.link} href={`/${blog._id}`}>
+                <Image src={blog.imageUrl} width={150} height={150} alt="Photo"/>
+                <h3 className={styles.title}>{blog.title}</h3>
+                <div className={styles.paragraphWrapper}>
+                  <p className={styles.paragraph}>{blog.body}</p>
                 </div>
-            </Link>
-            <span>{blog.tag.name}</span>
-          </div>
+              </Link>
+              <span className={styles.tag}>{blog.blogTag.name}</span>
+            </div>
           )
-        ))}
+        )}
     </div>
   );
 };
