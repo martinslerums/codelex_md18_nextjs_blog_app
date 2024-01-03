@@ -14,7 +14,7 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
   try {
     await connectMongoDB();
-    const blogs = await Blog.find().populate("blogTag", "name")
+    const blogs = await Blog.find() //populate("blogTag", "name")
     return new NextResponse(JSON.stringify(blogs));
   } catch (error) {
     return new NextResponse("Error in fetching MongoDB data: " + error);
@@ -27,3 +27,13 @@ export const GET = async () => {
 //     await Blog.findByIdAndDelete(id);
 //     return NextResponse.json({message: "Blog deleted"}, )
 // }
+
+// export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
+//   try {
+//     await connectToDB();
+//     const deleteBlog = await Blog.findByIdAndDelete(params.id);
+//     return new NextResponse(JSON.stringify(deleteBlog));
+//   } catch (error) {
+//     return new NextResponse('error' + error);
+//   }
+// };

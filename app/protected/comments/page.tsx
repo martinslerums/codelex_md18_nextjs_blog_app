@@ -1,6 +1,6 @@
 import AdminCommentsPage from "./AdminCommentsPage";
 
-const GetExistingComments = async () => {
+const GetComments = async () => {
     const response = await fetch("http://localhost:3000/api/comments", {
         cache: "no-store",
       });
@@ -13,7 +13,7 @@ const GetExistingComments = async () => {
 
 
 const ProtectedComments = async () => {
-    const comments = await GetExistingComments();
+    const comments = await GetComments();
    
 
     return ( 

@@ -11,3 +11,5 @@ const blogTagSchema = new Schema({
 const BlogTag = mongoose.models.BlogTag || mongoose.model("BlogTag", blogTagSchema);
 
 export default BlogTag
+
+

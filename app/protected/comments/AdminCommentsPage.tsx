@@ -2,7 +2,7 @@
 
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
-import { Comment } from "@/app/[id]/BlogCommentsList/BlogCommentsList";
+import { Comment } from "@/types/types/Comment";
 
 type AdminCommentsPageProps = {
   comments: Comment[];
