@@ -1,36 +1,57 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+## Prerequisites
+
+Create a cloud.mongodb.com account in order to have a cloud-data base.
+
 ## Getting Started
 
-First, run the development server:
+First, perform npm actions:
+
+```bash
+npm install
+```
+
+Adjust .env file with your MongoDB variables:
+
+```bash
+MONGO_USERNAME=
+MONGO_PASSWORD=
+MONGO_CLUSTER=
+```
+
+In /ibs/mongo/script.tsx file provide your MONGO_URI link and fill it with your account variables:
+
+```bash
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.tr5zj0y.mongodb.net/BlogsMongoDB`
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Navigate to app/api/user/route.tsx file, un-comment POST request in order to create your admin user. 
+Default values: username: Admin, password: password
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+// export const POST = async () => {
+//     try {
+//         await connectMongoDB()
+//         const passwordHash = await hash("password", 10)
+//         const adminUser = await UserModel.create({
+//             username: "Admin",
+//             password: passwordHash,
+//         })
+//         console.log("User created")
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+//         return NextResponse.json({
+//             adminUser
+//         })
+//     }catch (error) {
+//         console.error("Error message: ", error)
+//     }
+// }
+```

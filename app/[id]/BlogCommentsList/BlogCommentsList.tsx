@@ -1,5 +1,6 @@
 import { Comment, Params } from "@/types/types";
 import styles from "./BlogCommentsList.module.css"
+import { formatDistanceToNow } from "date-fns"
 
 export const getComments = async (id: string) => {
     console.log("Fetching comments for blog with ID AGAIN: ", id); 
@@ -24,8 +25,9 @@ const BlogCommentsList = async ({ params: { id } }: Params) => {
       <div className={styles.container}>
         {comments && comments.map((comment: Comment) => (
           <div key={comment._id} className={styles.wrapper}>
-              <h3>{comment.author}</h3>
-              <p>{comment.comment}</p>
+              <h3 className={styles.author}>{comment.author}</h3>
+              <p className={styles.comment}>{comment.comment}</p>
+              <p className={styles.timestamp}>{formatDistanceToNow(comment.createdAt)}</p>
           </div>
         ))}
       </div>

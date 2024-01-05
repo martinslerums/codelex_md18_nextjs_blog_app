@@ -1,0 +1,17 @@
+.button {
+  background-image: url("/icons/logout.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  outline: none;
+}
+
+.button:hover,
+.button:active {
+  transform: scale(1.2);
+}

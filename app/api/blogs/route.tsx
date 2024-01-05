@@ -1,39 +1,33 @@
 import connectMongoDB from "@/libs/mongo/script";
 import Blog from "@/libs/models/BlogSchema";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-// export const POST = async (request) => {
-//     const {title, imageUrl, body} = await request.json();
-//     await connectMongoDB();
-//     await Blog.create({
-//         title, imageUrl, body
-//     })
-//     return NextResponse.json({message: "Blog Created"}, {status: 201})
-// }
+export const POST = async (request: NextRequest) => {
+  try {
+    
+    await connectMongoDB();
+
+    const { title, imageUrl, body, blogTag} = await request.json();
+    await Blog.create({ title, imageUrl, body, blogTag});
+  
+    return NextResponse.json({ message: "Blog created" }, { status: 201 });
+
+  } catch(error) {
+      return new NextResponse("POST request for create blog failed " + error);
+  }
+};
 
 export const GET = async () => {
+
   try {
+
     await connectMongoDB();
-    const blogs = await Blog.find() //populate("blogTag", "name")
+
+    const blogs = await Blog.find().populate("blogTag", "name")
+
     return new NextResponse(JSON.stringify(blogs));
+
   } catch (error) {
-    return new NextResponse("Error in fetching MongoDB data: " + error);
+    return new NextResponse("GET request for blogs failed " + error);
   }
 }; 
-
-// export const DELETE = async(request) => {
-//     const id = request.nextUrl.searchParams.get('id')
-//     await connectMongoDB();
-//     await Blog.findByIdAndDelete(id);
-//     return NextResponse.json({message: "Blog deleted"}, )
-// }
-
-// export const DELETE = async (request: NextRequest, { params }: { params: { id: string } }) => {
-//   try {
-//     await connectToDB();
-//     const deleteBlog = await Blog.findByIdAndDelete(params.id);
-//     return new NextResponse(JSON.stringify(deleteBlog));
-//   } catch (error) {
-//     return new NextResponse('error' + error);
-//   }
-// };

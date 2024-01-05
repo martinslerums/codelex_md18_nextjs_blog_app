@@ -13,7 +13,6 @@ const Form = ({onSubmit, children}: FormProps ) => {
             className={styles.form}
             onSubmit={onSubmit}
         >
-            {/* <h6  className={styles.heading}>{label}</h6> */}
             <div className={styles.wrapper}>
                 {children}
             </div>

@@ -3,5 +3,5 @@
   flex-direction: column;
   align-items: center;
   padding: 35px 70px;
-  border: 1px solid grey
+  gap: 10px;
 }

@@ -3,8 +3,9 @@ import BlogCommentsForm from "./BlogCommentsForm/BlogCommentsForm";
 import BlogCommentsList from "./BlogCommentsList/BlogCommentsList";
 import BlogDetails from "./BlogDetails/BlogDetails";
 
+
 //Kādēļ nevar izmantot  { params: { id } }: Params ???
-const IndividualBlogView = async ({ params }: Params) => {
+const IndividualBlogView = ({ params }: Params) => {
   return (
     <main>
       <BlogDetails params={params}/>

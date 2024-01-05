@@ -20,9 +20,15 @@
   text-transform: none;
   user-select: none;
   touch-action: manipulation;
+
+  &.small{ 
+    padding: 7.5px 15px;
+    font-size: 12px;
+  }
 }
 
 .button:hover,
 .button:focus {
   opacity: .75;
 }
+

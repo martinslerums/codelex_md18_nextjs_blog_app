@@ -2,7 +2,7 @@ import styles from "./Input.module.css"
 
 type InputProps = {
     type: HTMLInputElement['type'],
-    placeholder: string,
+    placeholder?: string,
     name: string,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     value: string,
@@ -13,7 +13,7 @@ type InputProps = {
 const Input = ({value,label, name, onChange, placeholder, type, required, }: InputProps ) => {
     return ( 
     <div className={styles.wrapper}>
-        {/* <label>{label}</label> */}
+        <label>{label}</label>
         <input 
             className={styles.input}
             type={type}

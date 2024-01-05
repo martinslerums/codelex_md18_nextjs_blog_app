@@ -6,7 +6,7 @@ import { authOptions } from './api/auth/[...nextauth]/route';
 const getBlogs = async () => {
 
   const response = await fetch("http://localhost:3000/api/blogs", {
-    next: { revalidate: 30 },
+    next: { revalidate: 0 },
   });
 
   if (!response.ok) {

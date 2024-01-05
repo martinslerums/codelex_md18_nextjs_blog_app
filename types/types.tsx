@@ -2,7 +2,9 @@ export type Comment = {
   _id: string,
   author: string,
   comment: string,
+  createdAt: string,
   blog: {
+    _id: string,
     title: string,
   }
 }
@@ -20,5 +22,11 @@ export type Blog = {
   body: string,
   blogTag: {
     name: string;
+    _id: string;
   }
+}
+
+export type Tag = {
+  _id: string,
+  name: string
 }

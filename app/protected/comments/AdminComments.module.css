@@ -1,0 +1,25 @@
+.container { 
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.wrapper  {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.commentContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.blog {
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+}

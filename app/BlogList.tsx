@@ -1,46 +1,77 @@
-import { authOptions } from "./api/auth/[...nextauth]/route";
-import { Session, getServerSession } from "next-auth";
-import { Blog } from "@/types/types";
-import styles from "./BlogList.module.css";
-import Button from "./components/Button/Button";
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
+import { Session } from "next-auth";
+import { Blog } from "@/types/types";
+import { useRouter } from "next/navigation";
+import Button from "./components/Button/Button";
+import styles from "./BlogList.module.css";
+import parse from 'html-react-parser';
+
 
 type BlogListProps = {
   blogs: Blog[]
   isSession: Session | null
 }
 
+const handleDelete = async (id: string) => {
+  const response = await fetch(`http://localhost:3000/api/blogs/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete data: ${response.status}`);
+  }
+  
+  return response.json();
+}
+
+
+
 export const BlogsList =  ({blogs, isSession}: BlogListProps) => {
 
-  return (
-    <div className={styles.container}>
-      {blogs && blogs.map((blog: Blog) =>
-          isSession ? (
-            <div key={blog._id} className={styles.blog}>
-              <Link className={styles.link} href={`/${blog._id}`}>
-              <Image src={blog.imageUrl} width={400} height={250} alt="Photo"/>
-                <h3 className={styles.title}>{`${blog.title}`}</h3>
-                <div className={styles.paragraphWrapper}>
-                  <p className={styles.paragraph}>{blog.body}</p>
-                </div>
-              </Link>
-              <span className={styles.tag}>{blog.blogTag.name}</span>
-              <Button type="button" label="Did it work?" />
+  const router = useRouter();
+
+return (
+  <div className={styles.container}>
+    {blogs && blogs.map((blog: Blog) =>
+        isSession ? (
+          <div key={blog._id} className={styles.blog}>
+
+            <Link className={styles.link} href={`/${blog._id}`}>
+              <Image src={blog.imageUrl} width={440} height={200} alt="Photo" priority/>
+              <h3 className={styles.title}>{`${blog.title}`}</h3>
+              <div className={styles.paragraphWrapper}>{parse(blog.body.slice(0, 400).concat("..."))}  </div>
+            </Link>
+            <div className={styles.tagWrapper}>
+             <Link href={`/tag/${blog.blogTag._id}`} className={styles.tag}> {blog.blogTag?.name} </Link>
             </div>
-          ) : (
-            <div key={blog._id} className={styles.blog}>
-              <Link className={styles.link} href={`/${blog._id}`}>
-                <Image src={blog.imageUrl} width={150} height={150} alt="Photo"/>
-                <h3 className={styles.title}>{blog.title}</h3>
-                <div className={styles.paragraphWrapper}>
-                  <p className={styles.paragraph}>{blog.body}</p>
-                </div>
-              </Link>
-              <span className={styles.tag}>{blog.blogTag.name}</span>
+           
+            <div className={styles.buttonWrapper}>
+              <Button type="button" label="Delete blog" onClick={() => { 
+                handleDelete(blog._id)
+                router.refresh()
+                }}/>
+              <Button type="button" label="Edit blog"  />
             </div>
-          )
-        )}
-    </div>
-  );
-};
+
+          </div>
+        ) : (
+          <div key={blog._id} className={styles.blog}>
+           <Link className={styles.link} href={`/${blog._id}`}>
+            <Image src={blog.imageUrl} width={380} height={260} alt="Photo" priority/>
+              <h3 className={styles.title}>{`${blog.title}`}</h3>
+              <div className={styles.paragraphWrapper}>{parse(blog.body.slice(0, 400))}...</div>
+            </Link>
+            <div className={styles.tagWrapper}>
+             <Link href={`/tag/${blog.blogTag._id}`} className={styles.tag}> {blog.blogTag?.name} </Link>
+            </div>
+          </div>
+        )
+      )}
+  </div>  
+  )
+} 
+
+

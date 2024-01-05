@@ -7,7 +7,6 @@ import Input from "../../components/Input/Input";
 import Textarea from "../../components/Textarea/Textarea";
 import Button from "../../components/Button/Button";
 import Form from "@/app/components/Form/Form";
-import styles from "./CommentsForm.module.css";
 
 const initialFormValues = {
   author: "",
@@ -15,16 +14,15 @@ const initialFormValues = {
 };
 
 const BlogCommentsForm = ({params: {id}}: Params) => {
-
   console.log("BlogCommentsForm_ID using params: ", id);
   
   const router = useRouter()
+ 
   const [inputForm, setInputForm] = useState(initialFormValues);
 
   const handleCommentAdd = async (id: string) => {
 
-    const response = await fetch(
-      `http://localhost:3000/api/blogs/${id}/comments`,
+    const response = await fetch(`http://localhost:3000/api/blogs/${id}/comments`,
       {
         method: "POST",
         body: JSON.stringify(inputForm),
@@ -51,24 +49,22 @@ const BlogCommentsForm = ({params: {id}}: Params) => {
           router.refresh()
         }}
       >
-          <Input
-            type="text"
+        <Input
+          type="text"
             placeholder="Your name..."
             name="author"
             onChange={handleInputChange}
             value={inputForm.author}
             required
-            label="Author:"
-          />
-          <Textarea
-            placeholder="Your comment..."
+        />
+        <Textarea
+          placeholder="Your comment..."
             name="comment"
             onChange={handleInputChange}
             value={inputForm.comment}
             required
-            label="Add comment: "
-          />
-          <Button type="submit" label="Post a comment" />
+        />
+        <Button type="submit" label="Post a comment" size="small"/>
       </Form>
     </>
   );
