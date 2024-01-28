@@ -23,6 +23,7 @@ export const POST = async (request: NextRequest) => {
     await connectMongoDB();
 
     const { name } = await request.json();
+    
     await BlogTag.create({ name });
   
     return NextResponse.json({ message: "Blog created" }, { status: 201 });

@@ -7,6 +7,7 @@ import Input from "../../components/Input/Input";
 import Textarea from "../../components/Textarea/Textarea";
 import Button from "../../components/Button/Button";
 import Form from "@/app/components/Form/Form";
+import styles from "./BlogCommentsForm.module.css"
 
 const initialFormValues = {
   author: "",
@@ -14,22 +15,18 @@ const initialFormValues = {
 };
 
 const BlogCommentsForm = ({params: {id}}: Params) => {
-  console.log("BlogCommentsForm_ID using params: ", id);
   
   const router = useRouter()
- 
   const [inputForm, setInputForm] = useState(initialFormValues);
 
   const handleCommentAdd = async (id: string) => {
-
     const response = await fetch(`http://localhost:3000/api/blogs/${id}/comments`,
       {
         method: "POST",
         body: JSON.stringify(inputForm),
       }
     );
-
-    await response.json(); // parses JSON response into native JavaScript objects
+    await response.json();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,7 +37,8 @@ const BlogCommentsForm = ({params: {id}}: Params) => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
+
       <Form
         onSubmit={(event: FormEvent) => {
           event.preventDefault();
@@ -66,7 +64,8 @@ const BlogCommentsForm = ({params: {id}}: Params) => {
         />
         <Button type="submit" label="Post a comment" size="small"/>
       </Form>
-    </>
+      
+    </div>
   );
 };
 

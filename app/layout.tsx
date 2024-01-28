@@ -1,10 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter, Roboto } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import { Navbar } from './components/Navbar/Navbar'
 import Provider from './components/Provider/Provider'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 const roboto = Roboto({
   weight: "400",
@@ -17,14 +15,14 @@ export const metadata: Metadata = {
   description: 'Made by M.L.',
 }
 
-export default function RootLayout({children,}: {children: React.ReactNode}) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
     <html lang="en">
       <body className={roboto.className}>
         <Provider>
           <Navbar/>
-          <section>{children}</section>
+          <section className='contentWrapper'>{children}</section>
         </Provider>
       </body>
     </html>

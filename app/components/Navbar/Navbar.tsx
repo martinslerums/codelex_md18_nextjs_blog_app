@@ -8,7 +8,6 @@ import { getServerSession } from "next-auth";
 export const Navbar = async () => {
   const session = await getServerSession(authOptions);
 
-
   return session ? (
     <nav className={styles.nav}>
       <div className={styles.navItem}>
@@ -22,45 +21,20 @@ export const Navbar = async () => {
           Create a blog
         </Link>
       </div>
-      <div className={styles.navItem}>
+     
+      <div className={styles.user}>
         <span className={styles.admin}> Loged-in as {session.user?.username}</span>
         <SignOutButton />
       </div>
-
+      
     </nav>
   ) : (
-    <nav className={styles.nav}>
-      <Link className={styles.link} href={"/"}>
-        All blogs
-      </Link>
+    <nav className={styles.nav}> 
+      <div className={styles.navItemNonAdmin}>
+        <Link className={styles.link} href={"/"}>
+          All blogs
+        </Link>
+      </div>
     </nav>
   );
 };
-
-// paths ? (
-//   <Link href={'/protected/comments'}>All comments</Link>
-//   <SignOutButton />
-// ) : (
-//   <Link href={'/protected/blogs'}>All blogs</Link>
-//   <SignOutButton />
-// )
-
-// session ? (
-
-//   (url === "/protected") ? (
-//     <nav className={styles.nav}>
-//       <SignOutButton />
-//     </nav>
-//   ) : (
-//     <nav className={styles.nav}>
-//       <Link className={styles.link} href={'/protected/blogs'}>All blogs</Link>
-//       <Link className={styles.link} href={'/protected/comments'}>All comments</Link>
-//       <Link className={styles.link} href={'/protected/create'}>Create a blog</Link>
-//       <SignOutButton />
-//     </nav>
-//   )
-// ) : (
-// <nav className={styles.nav}>
-//   <Link className={styles.link} href={'/'}>All blogs</Link>
-// </nav>
-// )

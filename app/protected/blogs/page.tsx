@@ -1,20 +1,8 @@
 import { BlogsList } from "@/app/BlogList";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { Blog } from "@/types/types";
 import { getServerSession } from "next-auth";
 
-const getBlogs = async () => {
-
-    const response = await fetch("http://localhost:3000/api/blogs", {
-      next: { revalidate: 0 },
-    });
-  
-    if (!response.ok) {
-      throw new Error("Failed to fetch blogs from route-handler");
-    }
-  
-    return response.json();
-  
-  };
 
 const ProtectedBlogs = async () => {
   const blogs = await getBlogs()
@@ -26,3 +14,18 @@ const ProtectedBlogs = async () => {
 }
  
 export default ProtectedBlogs;
+
+
+const getBlogs = async () => {
+
+  const response = await fetch("http://localhost:3000/api/blogs", {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch blogs from route-handler");
+  }
+
+  return response.json();
+
+};

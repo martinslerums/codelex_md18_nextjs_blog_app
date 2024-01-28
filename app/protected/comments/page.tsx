@@ -1,6 +1,6 @@
 import AdminCommentsPage from "./AdminCommentsPage";
 
-const GetComments = async () => {
+const getComments = async () => {
     const response = await fetch("http://localhost:3000/api/comments", {
         cache: "no-store",
       });
@@ -8,19 +8,16 @@ const GetComments = async () => {
     if (!response.ok) {
         throw new Error(`Failed to fetch data: ${response.status}`);
       }
-    return response.json();
-}
 
+    return response.json();
+};
 
 const ProtectedComments = async () => {
-    const comments = await GetComments();
+  const comments = await getComments();
    
-
-    return ( 
-        <div>
-            <AdminCommentsPage comments={comments} />
-        </div>
-     );
-}
+  return ( 
+    <AdminCommentsPage comments={comments}/>
+  );
+};
  
 export default ProtectedComments;

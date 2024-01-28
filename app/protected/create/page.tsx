@@ -1,11 +1,9 @@
-import CreateBlogForm from "./CreateBlog";
-
+import CreateBlogForm from "./CreateBlogForm";
 
 const Create = () => {
-
   return (
-    <CreateBlogForm />
-  )
+    <CreateBlogForm/>
+  );
+};
 
-}
 export default Create;

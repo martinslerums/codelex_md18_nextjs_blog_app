@@ -1,24 +1,32 @@
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-content: center;
-    gap: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center; 
+    padding: 50px 20px;
 }
 
 .blog {
-    max-width: 720px;
-    width: 100%;
-    padding: 15px 20px;
-    transition: transform 0.7s ease;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: 10px;
     border-radius: 10px;
-    background-color: rgb(244, 244, 244);
 }
 
-.blog:hover,
-.blog:focus {
-  transform: scale(1.1);
+.blog:hover .linethrough {
+    border-color: red;
 }
+
+.image{
+    border-radius: 10px;
+    aspect-ratio: 1;
+    width: 100%;
+}
+
 
 .link {
     display: flex;
@@ -27,12 +35,12 @@
     text-decoration: none;
     color: black;
     gap: 10px;
-
 }
 
 .title {
-    font-weight: 700;
+    font-weight: bold;
     font-size: 2rem;
+    text-align: center;
 }
 
 .paragraphWrapper {
@@ -48,21 +56,37 @@
 
 .tagWrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     padding: 5px;
 }
 
 .tag {
-    border: 1px solid black;
     text-decoration: none;
-    padding: 2.5px 5px;
-    color: white;
-    border-radius: 3px;
-    background-color: #666666;
+    font-weight: 700;
+    letter-spacing:1.2px;
+    color: red;
+}
+
+.linethrough {
+    width: 100%;
+    border: 1px solid black;
 }
 
 .buttonWrapper {
     display: flex;
-    gap: 50px;
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+
+@media screen and (min-width: 1065px) and (max-width: 1585px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 1065px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
 }

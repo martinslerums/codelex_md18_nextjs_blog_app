@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import ProtectedNavigation from "./ProtectedNavigation/ProtectedNavigation";
+
 
 
 
@@ -13,11 +13,7 @@ const ServerProtectedPage = async () => {
         redirect("/api/auth/signin?callbackUrl=/protected")
     }
 
-    return ( 
-        <>
-         <ProtectedNavigation />
-        </>
-     );
+    return
 }
  
 export default ServerProtectedPage
